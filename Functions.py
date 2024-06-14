@@ -113,16 +113,17 @@ def Select_k_best_features(X, y, k=10, score_func=mutual_info_regression):
     
     # Get the scores of the features
     scores = pd.Series(selector.scores_, index=X.columns, name='Scores')
-    selected_features = scores.nlargest(k).index
-    X_new = X[selected_features]
+    
+    # Select only the top k features based on scores in descending order
+    top_k_scores = scores.nlargest(k)
 
-    # Plot the scores
-    plt.figure(figsize=(10, 6))
-    scores.nlargest(k).sort_values().plot(kind='barh')
-    plt.title(f'Top {k} Features Selected by {score_func.__name__}')
-    plt.xlabel('Score')
-    plt.ylabel('Feature')
-    plt.show()
+    # Print scores of only the top k features in descending order
+    print("Scores of top", k, "features in descending order:")
+    print(top_k_scores)
+
+    # Extract the names of the top k features
+    selected_features = top_k_scores.index
+    X_new = X[selected_features]
 
     return X_new, scores
 
