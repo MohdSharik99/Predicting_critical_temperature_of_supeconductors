@@ -3,19 +3,26 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+<<<<<<< HEAD
 from scipy import stats
 from sklearn.decomposition import PCA
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 import statsmodels.api as sm
+=======
+from sklearn.decomposition import PCA
+>>>>>>> f4df4b65f5de70e3102d633d598aed40ce607514
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import LocalOutlierFactor
 from sklearn.feature_selection import mutual_info_regression, SelectKBest
 from sklearn.metrics import mean_absolute_error, r2_score, mean_squared_error
+<<<<<<< HEAD
 
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
+=======
+>>>>>>> f4df4b65f5de70e3102d633d598aed40ce607514
 
 
 def Basic_info_func(X):
@@ -30,7 +37,11 @@ def Basic_info_func(X):
     
     return df.set_index('Feature')
 
+<<<<<<< HEAD
 
+=======
+# outlier removal
+>>>>>>> f4df4b65f5de70e3102d633d598aed40ce607514
 def Remove_outliers_with_lof(train_X, train_y, contamination=0.05):
     """
     Detect outliers in the DataFrame using Local Outlier Factor (LOF) and remove them.
@@ -76,6 +87,10 @@ def Remove_outliers_with_lof(train_X, train_y, contamination=0.05):
 
     return new_train_X, new_train_y
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> f4df4b65f5de70e3102d633d598aed40ce607514
 # calculate mutual information for feature selection
 
 def Select_k_best_features(X, y, k=10, score_func=mutual_info_regression):
@@ -112,6 +127,7 @@ def Select_k_best_features(X, y, k=10, score_func=mutual_info_regression):
     return X_new, scores
 
 
+<<<<<<< HEAD
 # PCA 
 
 def Apply_pca(X, n_components=None, desired_variance=None):
@@ -161,3 +177,54 @@ def Apply_pca(X, n_components=None, desired_variance=None):
     plt.show()
 
     return X_pca_df, pca, n_components
+=======
+   
+
+# Adjusted r2_score
+def Adjusted_r2_score(true_values, predicted_values, num_features):
+    
+    r2 = r2_score(true_values, predicted_values)
+
+    n = len(true_values)
+    
+    p = num_features
+    
+    adjusted_r2 = 1 - ((1 - r2) * (n - 1) / (n - p - 1))
+    
+    return adjusted_r2
+
+# Evaluation metrics
+def Evaluation_results(true_values, predicted_values, objective='train', num_features=None):
+    if objective == 'train':
+        rmse_train = mean_squared_error(true_values, predicted_values, squared=False)
+        mae_train = mean_absolute_error(true_values, predicted_values)
+        r2_train = r2_score(true_values, predicted_values)
+        adjusted_r2_train = Adjusted_r2_score(true_values, predicted_values, num_features)
+        
+        print('\n', '- '*30)
+        print('Training results:')
+        print(f'Training RMSE: {rmse_train:.5f}')
+        print(f'Training MAE: {mae_train:.5f}')
+        print(f'Training R2 score: {r2_train:.5f}')
+        print(f'Training Adjusted R2 score: {adjusted_r2_train:.5f}')
+    
+    elif objective == 'test':
+        rmse_test = mean_squared_error(true_values, predicted_values, squared=False)
+        mae_test = mean_absolute_error(true_values, predicted_values)
+        r2_test = r2_score(true_values, predicted_values)
+        adjusted_r2_test = Adjusted_r2_score(true_values, predicted_values, num_features)
+        
+        print('\n', '- '*30)
+        print('\nTesting results:')
+        print(f'Testing RMSE: {rmse_test:.5f}')
+        print(f'Testing MAE: {mae_test:.5f}')
+        print(f'Testing R2 score: {r2_test:.5f}')
+        print(f'Testing Adjusted R2 score: {adjusted_r2_test:.5f}')
+    
+    else:
+        raise ValueError("Invalid value for 'objective'. Must be 'train' or 'test'.")
+
+
+
+    
+>>>>>>> f4df4b65f5de70e3102d633d598aed40ce607514
