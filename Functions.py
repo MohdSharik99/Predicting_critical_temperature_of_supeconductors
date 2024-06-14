@@ -6,6 +6,7 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import LocalOutlierFactor
 from sklearn.feature_selection import mutual_info_regression, SelectKBest
+from sklearn.metrics import mean_absolute_error, r2_score, mean_squared_error
 
 
 def Basic_info_func(X):
@@ -103,52 +104,52 @@ def Select_k_best_features(X, y, k=10, score_func=mutual_info_regression):
     return X_new, scores
 
 
-# PCA 
+   
 
-def Apply_pca(X, n_components=None, desired_variance=None):
-    """
-    Apply PCA to reduce dimensionality of the dataset based on number of components or desired variance.
+# Adjusted r2_score
+def Adjusted_r2_score(true_values, predicted_values, num_features):
+    
+    r2 = r2_score(true_values, predicted_values)
 
-    Parameters:
-    - X: DataFrame or 2D array-like, containing features.
-    - n_components: int or None, number of principal components to keep.
-                    If None, all components are kept.
-    - desired_variance: float or None, the amount of variance you want to retain.
-                        Should be between 0 and 1.
-                        If provided, overrides n_components.
+    n = len(true_values)
+    
+    p = num_features
+    
+    adjusted_r2 = 1 - ((1 - r2) * (n - 1) / (n - p - 1))
+    
+    return adjusted_r2
 
-    Returns:
-    - X_pca: DataFrame containing the transformed features.
-    - pca: The fitted PCA object.
-    - n_components: int, the number of principal components retained.
-    """
-    # Standardize the features
-    scaler = StandardScaler()
-    X_scaled = scaler.fit_transform(X)
+# Evaluation metrics
+def Evaluation_results(true_values, predicted_values, objective='train', num_features=None):
+    if objective == 'train':
+        rmse_train = mean_squared_error(true_values, predicted_values, squared=False)
+        mae_train = mean_absolute_error(true_values, predicted_values)
+        r2_train = r2_score(true_values, predicted_values)
+        adjusted_r2_train = Adjusted_r2_score(true_values, predicted_values, num_features)
+        
+        print('\n', '- '*30)
+        print('Training results:')
+        print(f'Training RMSE: {rmse_train:.5f}')
+        print(f'Training MAE: {mae_train:.5f}')
+        print(f'Training R2 score: {r2_train:.5f}')
+        print(f'Training Adjusted R2 score: {adjusted_r2_train:.5f}')
+    
+    elif objective == 'test':
+        rmse_test = mean_squared_error(true_values, predicted_values, squared=False)
+        mae_test = mean_absolute_error(true_values, predicted_values)
+        r2_test = r2_score(true_values, predicted_values)
+        adjusted_r2_test = Adjusted_r2_score(true_values, predicted_values, num_features)
+        
+        print('\n', '- '*30)
+        print('\nTesting results:')
+        print(f'Testing RMSE: {rmse_test:.5f}')
+        print(f'Testing MAE: {mae_test:.5f}')
+        print(f'Testing R2 score: {r2_test:.5f}')
+        print(f'Testing Adjusted R2 score: {adjusted_r2_test:.5f}')
+    
+    else:
+        raise ValueError("Invalid value for 'objective'. Must be 'train' or 'test'.")
 
-    # Apply PCA
-    pca = PCA(n_components=n_components)
 
-    if desired_variance is not None:
-        # If desired_variance is specified, calculate the number of components to retain
-        pca.fit(X_scaled)
-        cumulative_explained_variance = np.cumsum(pca.explained_variance_ratio_)
-        n_components = np.argmax(cumulative_explained_variance >= desired_variance) + 1
-        pca = PCA(n_components=n_components)
 
-    # Fit and transform the data
-    X_pca = pca.fit_transform(X_scaled)
-
-    # Create DataFrame with principal components
-    col_names = [f'PC{i+1}' for i in range(X_pca.shape[1])]
-    X_pca_df = pd.DataFrame(X_pca, columns=col_names)
-
-    # Plot explained variance ratio
-    plt.figure(figsize=(6, 4))
-    plt.plot(range(1, len(pca.explained_variance_ratio_) + 1), pca.explained_variance_ratio_, marker='o')
-    plt.xlabel('Number of Principal Components')
-    plt.ylabel('Explained Variance Ratio')
-    plt.title('Explained Variance Ratio by Principal Components')
-    plt.show()
-
-    return X_pca_df, pca, n_components
+    
