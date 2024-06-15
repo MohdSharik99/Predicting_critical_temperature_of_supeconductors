@@ -90,16 +90,22 @@ def Select_k_best_features(X, y, k=10, score_func=mutual_info_regression):
     
     # Get the scores of the features
     scores = pd.Series(selector.scores_, index=X.columns, name='Scores')
+    scores = scores.nlargest(k).sort_values(ascending=False)
     selected_features = scores.nlargest(k).index
     X_new = X[selected_features]
 
-    # Plot the scores
-    plt.figure(figsize=(10, 6))
-    scores.nlargest(k).sort_values().plot(kind='barh')
-    plt.title(f'Top {k} Features Selected by {score_func.__name__}')
-    plt.xlabel('Score')
-    plt.ylabel('Feature')
-    plt.show()
+#     # Plot the scores
+#     plt.figure(figsize=(6, 5), dpi = 110)
+#     ax = scores.plot(kind='barh')
+#     plt.title(f'Top {k} Features Selected by {score_func.__name__}')
+#     plt.xlabel('Score', size = 8)
+#     plt.ylabel('Feature', size = 8)
+    
+#     # Annotate the bars with the feature scores
+#     for index, value in enumerate(scores):
+#         ax.text(value, index, f'{value:.2f}', va='center')
+    
+#     plt.show()
 
     return X_new, scores
 
