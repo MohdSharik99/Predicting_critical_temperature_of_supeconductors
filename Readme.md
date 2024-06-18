@@ -64,12 +64,13 @@ Configuration
 Configuration settings for the project are in the config.py file. You can modify paths, model parameters, feature selection parameters, outlier removal parameters, and plot parameters as needed.
 
 Project Details
-Data Preprocessing
-Reading Data: The training and testing data are read from CSV files located in the Data directory.
-Outlier Removal: Outliers are removed using the Local Outlier Factor method.
-Feature Selection: The best features are selected using mutual information regression.
-Data Scaling: The selected features are scaled using StandardScaler.
-Model Building
+* Data Preprocessing
+* Reading Data: The training and testing data are read from CSV files located in the Data directory.
+* Outlier Removal: Outliers are removed using the Local Outlier Factor method.
+* Feature Selection: The best features are selected using mutual information regression.
+* Data Scaling: The selected features are scaled using StandardScaler.
+  
+## Model Building
 An XGBoost Regressor model is built and trained on the preprocessed data. The model's performance is evaluated using Mean Squared Error, Mean Absolute Error, and R-squared metrics.
 
 Results
