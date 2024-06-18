@@ -8,13 +8,19 @@ This repository contains the code and data for predicting the critical temperatu
 ```
 Predicting_Critical_Temperature_Of_Superconductors/
 ├── Data/
-│ ├── train_df.csv
-│ └── test_df.csv
-├── Functions.py
-├── config.py
-├── main.py
-├── .gitignore
-└── README.md
+├── Readme.md
+├── Exploratory Data Analysis.ipynb
+├── Modeling_with_Select_k_best_features_30.ipynb
+└── packaged_folder/
+    ├── Data/
+    ├── Functions.py
+    ├── config.py
+    ├── requirements.txt
+    ├── scaler.pkl
+    ├── selected_columns.pkl
+    ├── test.py
+    ├── train.py
+    └── xgb_model.pkl
 ```
 
 
