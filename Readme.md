@@ -80,10 +80,10 @@ __pycache__/
 License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-Acknowledgments
-Thanks to all the contributors and the open-source community for their invaluable support and resources.
+Acknowledgements
+Special thanks to all the contributors and the open-source community for their invaluable support and resources.
 
-Arduino
+css
 Copy code
 
-Make sure to replace placeholders like `https://github.com/MohdSharik99/Predicting_Critical_Temperatu
+You can copy this Markdown content and paste it directly into the README.md file on GitHub.
