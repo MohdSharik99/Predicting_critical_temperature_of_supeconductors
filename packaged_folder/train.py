@@ -1,11 +1,12 @@
+# train.py
+
 # Importing important libraries
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 import xgboost as xgb
 from sklearn.preprocessing import StandardScaler
 from sklearn.feature_selection import mutual_info_regression
+from sklearn.model_selection import train_test_split
+import joblib
 import warnings
 
 # Importing custom functions and configurations
@@ -16,14 +17,13 @@ warnings.filterwarnings('ignore')
 
 def main():
     # Reading Data from Data Directory
-    train_df = pd.read_csv(config.DATA_PATHS['train_data'])
-    test_df = pd.read_csv(config.DATA_PATHS['test_data'])
+    data_df = pd.read_csv(config.DATA_PATHS['data'])
 
-    X_train = train_df.drop('critical_temp', axis=1)
-    y_train = train_df['critical_temp']
+    X = data_df.drop('critical_temp', axis=1)
+    y = data_df['critical_temp']
 
-    X_test = test_df.drop('critical_temp', axis=1)
-    y_test = test_df['critical_temp']
+    # Splitting data into train and test sets
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
     # Removing outliers
     new_train_X, new_train_y = Remove_outliers_with_lof(X_train, y_train, contamination=config.OUTLIER_REMOVAL_PARAMS['contamination'])
@@ -34,11 +34,12 @@ def main():
 
     # Scaling Data
     selected_columns = X_train_filtered.columns
-    X_test_filtered = X_test[selected_columns]
-
     scaler = StandardScaler()
     scaled_train_k_best = scaler.fit_transform(X_train_filtered)
-    scaled_test_k_best = scaler.transform(X_test_filtered)
+
+    # Save the scaler for later use in test.py
+    joblib.dump(scaler, 'scaler.pkl')
+    joblib.dump(selected_columns, 'selected_columns.pkl')
 
     # Final Model
     xgb_model = xgb.XGBRegressor(**config.MODEL_PARAMS)
@@ -52,21 +53,8 @@ def main():
     train_metrics = Evaluation_results(new_train_y, xgb_train_preds, objective='train', num_features=num_features)
     print(train_metrics)
 
-    # Predict on the testing set
-    xgb_test_preds = xgb_model.predict(scaled_test_k_best)
-
-    # Testing results
-    test_metrics = Evaluation_results(y_test, xgb_test_preds, objective='test', num_features=num_features)
-    print(test_metrics)
-
-    # Plotting the results
-    sns.set_style(config.PLOT_PARAMS['style'])
-    sns.scatterplot(x=y_test, y=xgb_test_preds)
-    plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', lw=2)
-    plt.xlabel(config.PLOT_PARAMS['xlabel'])
-    plt.ylabel(config.PLOT_PARAMS['ylabel'])
-    plt.title(config.PLOT_PARAMS['title'])
-    plt.show()
+    # Save the model
+    joblib.dump(xgb_model, 'xgb_model.pkl')
 
 if __name__ == "__main__":
     main()
