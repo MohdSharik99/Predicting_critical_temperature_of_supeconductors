@@ -1,55 +1,54 @@
-markdown
-Copy code
 # Predicting Critical Temperature of Superconductors
 
 This repository contains the code and data for predicting the critical temperature of superconductors. The project involves data preprocessing, feature selection, outlier removal, and building a predictive model using XGBoost.
 
 ## Project Structure
 
-```plaintext
 Predicting_Critical_Temperature_Of_Superconductors/
 ├── Data/
-│   ├── train_df.csv
-│   ├── test_df.csv
+│ ├── train_df.csv
+│ ├── test_df.csv
 ├── Functions.py
 ├── config.py
 ├── main.py
 ├── .gitignore
 └── README.md
-Requirements
-Python 3.7 or higher
-pandas
-numpy
-matplotlib
-seaborn
-scikit-learn
-xgboost
-statsmodels
-Setup
-Clone the repository:
 
-sh
+markdown
 Copy code
+
+## Requirements
+
+- Python 3.7 or higher
+- pandas
+- numpy
+- matplotlib
+- seaborn
+- scikit-learn
+- xgboost
+- statsmodels
+
+## Setup
+
+### Clone the repository:
+
+```sh
 git clone https://github.com/MohdSharik99/Predicting_Critical_Temperature_Of_Superconductors.git
 cd Predicting_Critical_Temperature_Of_Superconductors
 Create and activate a virtual environment:
-
 sh
 Copy code
 python -m venv venv
 source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 Install the required packages:
-
 sh
 Copy code
 pip install -r requirements.txt
 Usage
 Prepare the data:
-
 Ensure the train_df.csv and test_df.csv files are placed in the Data/ directory.
 
 Run the script:
-
 sh
 Copy code
 python main.py
@@ -74,19 +73,17 @@ The custom functions for data preprocessing and model evaluation are defined in 
 .gitignore
 The .gitignore file includes the following:
 
+markdown
+Copy code
 .ipynb_checkpoints/
 __pycache__/
-
 License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-Acknowledgements
-Special thanks to all the contributors and the open-source community for their invaluable support and resources.
+Acknowledgments
+Thanks to all the contributors and the open-source community for their invaluable support and resources.
 
+Arduino
+Copy code
 
-
-This `README.md` provides an overview of the project, including setup instructions, usage, configuration details, and an explanation of the project structure. Adjust the details to better fit your specific project requirements as needed.
-
-
-
-
+Make sure to replace placeholders like `https://github.com/MohdSharik99/Predicting_Critical_Temperatu
