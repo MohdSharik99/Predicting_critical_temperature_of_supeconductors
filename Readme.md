@@ -6,7 +6,7 @@ This repository contains the code and data for predicting the critical temperatu
 
 ## Project Structure
 
-```plaintext```
+```sh
 Predicting_Critical_Temperature_Of_Superconductors/
 ├── Data/
 │   ├── train_df.csv
@@ -15,7 +15,8 @@ Predicting_Critical_Temperature_Of_Superconductors/
 ├── config.py
 ├── main.py
 ├── .gitignore
-└── README.md
+└── README.md```
+
 Requirements
 Python 3.7 or higher
 pandas
