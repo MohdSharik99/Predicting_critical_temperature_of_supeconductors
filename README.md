@@ -1,1 +1,0 @@
-# Predicting_critical_temperature_of_supeconductors
