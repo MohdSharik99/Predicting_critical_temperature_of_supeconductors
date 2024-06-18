@@ -41,7 +41,7 @@ Predicting_Critical_Temperature_Of_Superconductors/
 
 ```plaintext
 git clone https://github.com/MohdSharik99/Predicting_Critical_Temperature_Of_Superconductors.git
-cd Predicting_Critical_Temperature_Of_Superconductors
+cd Predicting_Critical_Temperature_Of_Superconductors/packaged_folder
 ```
 
 Create and activate a virtual environment:
