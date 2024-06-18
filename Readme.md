@@ -50,6 +50,7 @@ Clone the repository:
 ```
 # Clone repository
 git clone https://github.com/MohdSharik99/Predicting_Critical_Temperature_Of_Superconductors.git
+
 cd Predicting_Critical_Temperature_Of_Superconductors/packaged_folder
 ```
 
