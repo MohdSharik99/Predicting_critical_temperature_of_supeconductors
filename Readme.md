@@ -5,7 +5,7 @@ This repository contains the code and data for predicting the critical temperatu
 ## Project Structure
 
 
-~~~
+```
 Predicting_Critical_Temperature_Of_Superconductors/
 ├── Data/
 │ ├── train_df.csv
@@ -15,7 +15,7 @@ Predicting_Critical_Temperature_Of_Superconductors/
 ├── main.py
 ├── .gitignore
 └── README.md
-~~~
+```
 
 
 ## Requirements
