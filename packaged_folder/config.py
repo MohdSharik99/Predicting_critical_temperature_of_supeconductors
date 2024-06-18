@@ -3,7 +3,8 @@
 # Data paths
 DATA_PATHS = {
     'train_data': './Data/train_df.csv',
-    'test_data': './Data/test_df.csv'
+    'test_data': './Data/test_df.csv',
+    'data': './Data/Source_data.csv'  # Adjust the path according to your actual file structure
 }
 
 # Model parameters

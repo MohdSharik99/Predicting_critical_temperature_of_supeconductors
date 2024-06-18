@@ -17,13 +17,12 @@ warnings.filterwarnings('ignore')
 
 def main():
     # Reading Data from Data Directory
-    data_df = pd.read_csv(config.DATA_PATHS['data'])
+    data_df = pd.read_csv(config.DATA_PATHS['train_data'])
 
-    X = data_df.drop('critical_temp', axis=1)
-    y = data_df['critical_temp']
+    X_train = data_df.drop('critical_temp', axis=1)
+    y_train = data_df['critical_temp']
 
-    # Splitting data into train and test sets
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+ 
 
     # Removing outliers
     new_train_X, new_train_y = Remove_outliers_with_lof(X_train, y_train, contamination=config.OUTLIER_REMOVAL_PARAMS['contamination'])

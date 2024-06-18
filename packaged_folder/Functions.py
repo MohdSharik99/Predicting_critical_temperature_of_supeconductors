@@ -139,6 +139,8 @@ def Evaluation_results(true_values, predicted_values, objective='train', num_fea
         print(f'Training MAE: {mae_train:.5f}')
         print(f'Training R2 score: {r2_train:.5f}')
         print(f'Training Adjusted R2 score: {adjusted_r2_train:.5f}')
+        
+        return ''
     
     elif objective == 'test':
         rmse_test = mean_squared_error(true_values, predicted_values, squared=False)
@@ -152,10 +154,8 @@ def Evaluation_results(true_values, predicted_values, objective='train', num_fea
         print(f'Testing MAE: {mae_test:.5f}')
         print(f'Testing R2 score: {r2_test:.5f}')
         print(f'Testing Adjusted R2 score: {adjusted_r2_test:.5f}')
+        
+        return ''
     
     else:
         raise ValueError("Invalid value for 'objective'. Must be 'train' or 'test'.")
-
-
-
-    

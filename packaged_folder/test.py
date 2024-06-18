@@ -23,6 +23,7 @@ def main():
     selected_columns = joblib.load('selected_columns.pkl')
     X_test_filtered = X_test[selected_columns]
 
+    print(f'Number of testing points: ',len(X_test_filtered))
     # Scale the test data
     scaled_test_k_best = scaler.transform(X_test_filtered)
 
@@ -31,7 +32,7 @@ def main():
 
     # Predict on the testing set
     xgb_test_preds = xgb_model.predict(scaled_test_k_best)
-
+    
     # Testing results
     num_features = scaled_test_k_best.shape[1]
     test_metrics = Evaluation_results(y_test, xgb_test_preds, objective='test', num_features=num_features)
