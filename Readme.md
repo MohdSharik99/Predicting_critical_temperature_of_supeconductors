@@ -14,8 +14,6 @@ Predicting_Critical_Temperature_Of_Superconductors/
 ├── .gitignore
 └── README.md
 
-markdown
-Copy code
 
 ## Requirements
 
@@ -32,7 +30,7 @@ Copy code
 
 ### Clone the repository:
 
-```sh
+
 git clone https://github.com/MohdSharik99/Predicting_Critical_Temperature_Of_Superconductors.git
 cd Predicting_Critical_Temperature_Of_Superconductors
 Create and activate a virtual environment:
