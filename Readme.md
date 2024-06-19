@@ -12,7 +12,7 @@ This repository contains the code and data for predicting the critical temperatu
 * Results
 * Custom Functions
 * License
-*Acknowledgments
+* Acknowledgments
 
 ## Project Structure
 ```
